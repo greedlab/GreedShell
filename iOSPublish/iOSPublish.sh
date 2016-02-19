@@ -20,8 +20,12 @@ echo config file path is: $1
 # 当前目录
 CURRENT_DIR=${PWD}
 
+SCRIPT_DIR_RELATIVE=`dirname $0`
+
 # 脚本所在目录
-SCRIPT_DIR=${PWD}/`dirname $0`
+SCRIPT_DIR=`cd ${SCRIPT_DIR_RELATIVE};pwd`
+
+echo SCRIPT_DIR:${SCRIPT_DIR}
 
 # 读取配置
 source ${SCRIPT_DIR}/iOSPublish.default.config
