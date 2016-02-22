@@ -1,15 +1,15 @@
 #!/bin/bash
 
-function failed() {
-    echo "Failed: $@" >&2
-    exit 1
-}
-
 if [[ $# -ne 1 ]]; then
   echo USAGE:
   echo iOSPublish.sh [config file path]
   exit 1
 fi
+
+function failed() {
+    echo "Failed: $@" >&2
+    exit 1
+}
 
 if [[ ! -f $1 ]]; then
   failed "wrong file $1"
@@ -20,10 +20,8 @@ echo config file path is: $1
 # 当前目录
 CURRENT_DIR=${PWD}
 
-SCRIPT_DIR_RELATIVE=`dirname $0`
-
 # 脚本所在目录
-SCRIPT_DIR=`cd ${SCRIPT_DIR_RELATIVE};pwd`
+SCRIPT_DIR=$(cd "$(dirname "$0")"; pwd)
 
 echo SCRIPT_DIR:${SCRIPT_DIR}
 
@@ -42,17 +40,31 @@ echo "APP_DIR:${APP_DIR}"
 if [[ ! -f ${APP_PLIST_PATH} ]]; then
   failed "${APP_PLIST_PATH} is not existed"
 fi
+echo "APP_PLIST_PATH:${APP_PLIST_PATH}"
 
-APP_BUILD=`/usr/libexec/PlistBuddy -c "Print CFBundleVersion" ${APP_PLIST_PATH}`
 APP_VERSION=`/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" ${APP_PLIST_PATH}`
-echo "APP_VERSION:${APP_VERSION}"
-echo "APP_BUILD:${APP_BUILD}"
+APP_BUILD=""
+APP_SAVE_DIR=""
+APP_SAVE_DIR_EXISTED=1
 
-# ipa和xcarchive文件最终存储路径
-APP_SAVE_DIR=${APP_DIR}/${APP_NAME}_${CONFIGURATION}_V${APP_VERSION}_B${APP_BUILD}
-if [[ -d ${APP_SAVE_DIR} ]]; then
-  failed "${APP_SAVE_DIR} is existed,please modify build!"
-fi
+while [[ ${APP_SAVE_DIR_EXISTED} -gt 0 ]]; do
+  APP_BUILD=`${SCRIPT_DIR}/getAppBuild.sh -p "${APP_PLIST_PATH}"`
+  if [[ -z ${APP_BUILD} ]]; then
+    echo "error: APP_BUILD is empty"
+    exit 1
+  fi
+  echo APP_BUILD:${APP_BUILD}
+  # ipa和xcarchive文件最终存储路径
+  APP_SAVE_DIR=${APP_DIR}/${APP_NAME}_${CONFIGURATION}_V${APP_VERSION}_B${APP_BUILD}
+  if [[ -d ${APP_SAVE_DIR} ]]; then
+    echo "APP_SAVE_DIR_EXISTED=1"
+    ${SCRIPT_DIR}/updateAppBuild.sh -b ${APP_BUILD} -p ${APP_PLIST_PATH} || failed "updateAppBuild.sh"
+    APP_SAVE_DIR_EXISTED=1
+  else
+    echo "APP_SAVE_DIR_EXISTED=0"
+    APP_SAVE_DIR_EXISTED=0
+  fi
+done
 
 mkdir -pv ${APP_SAVE_DIR} || failed "mkdir ${APP_SAVE_DIR}"
 echo "APP_SAVE_DIR:${APP_SAVE_DIR}"

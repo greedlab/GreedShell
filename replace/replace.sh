@@ -43,14 +43,17 @@ while getopts i:o:f:t:h opt; do
 done
 
 if [[ -z ${INPUT_STRING} ]]; then
+  echo failed:$0$*
   usage
 fi
 
 if [[ -z ${OUTPUT_STRING} ]]; then
+  echo failed:$0$*
   usage
 fi
 
 if [[ ! -d ${TARGET_DIR} ]]; then
+  echo failed:$0$*
   usage
 fi
 

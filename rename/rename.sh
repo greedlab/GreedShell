@@ -39,14 +39,17 @@ while getopts i:o:t:h opt; do
 done
 
 if [[ -z ${INPUT_FILE_NAME} ]]; then
+  echo failed:$0$*
   usage
 fi
 
 if [[ -z ${OUTPUT_FILE_NAME} ]]; then
+  echo failed:$0$*
   usage
 fi
 
 if [[ ! -d ${TARGET_DIR} ]]; then
+  echo failed:$0$*
   usage
 fi
 
