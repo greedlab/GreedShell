@@ -1,6 +1,7 @@
 #!/bin/bash
 # Auth:bell@greedlab.com
 
+# config
 INPUT_FILE_NAME=""
 OUTPUT_FILE_NAME=""
 TARGET_DIR=./
@@ -11,7 +12,7 @@ function usage() {
   echo "-o output file name"
   echo "-t target directory。default ./"
   echo "-h help"
-  echo "EG: rename.sh -i 'input.h' -o 'output.h'"
+  echo "Example: rename.sh -i 'input.h' -o 'output.h'"
   exit 1
 }
 
@@ -39,17 +40,17 @@ while getopts i:o:t:h opt; do
 done
 
 if [[ -z ${INPUT_FILE_NAME} ]]; then
-  echo failed:$0$*
+  echo failed:$0 $*
   usage
 fi
 
 if [[ -z ${OUTPUT_FILE_NAME} ]]; then
-  echo failed:$0$*
+  echo failed:$0 $*
   usage
 fi
 
 if [[ ! -d ${TARGET_DIR} ]]; then
-  echo failed:$0$*
+  echo failed:$0 $*
   usage
 fi
 

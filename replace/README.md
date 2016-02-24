@@ -5,11 +5,11 @@
 ## usage
 
 ```
-Usage: args [-i] <INPUT_STRING> [-o] <OUTPUT_STRING> -f <FILE_SUFFIX> [-t] <TARGET_DIR>
--i input string
--o output string
--f file suffix。default all files
--t target directory。default ./
--h help
-EG: replace.sh -i 'input string' -o 'output string' -f 'm'
+echo "Usage: args [-i] <INPUT_STRING> [-o] <OUTPUT_STRING> -f <FILE_SUFFIX> [-t] <TARGET_DIR>"
+echo "-i input string"
+echo "-o output string"
+echo "-f file suffixes,split with \",\" . eg \"h,m\" . default all files"
+echo "-t target directory。default \"./\""
+echo "-h help"
+echo "Example: replace.sh -i \"input string\" -o \"output string\" -f \"h,m\""
 ```

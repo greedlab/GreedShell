@@ -24,8 +24,10 @@ function checkInt(){
   [ $? -ne 0 ] && { echo "$1 must be integer!";exit 1; }
 }
 
+# config
 APP_BUILD=""
 PLIST_FILE_PATH=""
+
 while getopts b:p:h opt; do
     case $opt in
         b)
