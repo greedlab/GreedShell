@@ -20,8 +20,12 @@ function failed() {
 }
 
 function checkInt(){
-  expr $1 + 0 &>/dev/null
-  [ $? -ne 0 ] && { echo "$1 must be integer!";exit 1; }
+  if [[ $1 != *[!0-9]* ]]; then
+      echo "'$1' is strictly numeric"
+  else
+      echo "'$1' has a non-digit somewhere in it"
+      exit 1
+  fi
 }
 
 # config

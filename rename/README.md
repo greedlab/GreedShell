@@ -5,10 +5,10 @@
 ## usage
 
 ```
-Usage: args [-i] <INPUT_FILE_NAME> [-o] <OUTPUT_FILE_NAME> -f <FILE_SUFFIX> [-t] <TARGET_DIR>
--i input file name
--o output file name
--t target directory。default ./
--h help
-EG: rename.sh -i 'input.h' -o 'output.h'
+echo "Usage: args [-i] <INPUT_FILE_NAME> [-o] <OUTPUT_FILE_NAME> -f <FILE_SUFFIX> [-t] <TARGET_DIR>"
+echo "-i input file name"
+echo "-o output file name"
+echo "-t target directory。default ./"
+echo "-h help"
+echo "Example: rename.sh -i input.h -o output.h"
 ```

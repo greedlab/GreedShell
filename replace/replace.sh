@@ -52,7 +52,11 @@ fi
 
 filter_name=\*
 if [[ -n ${FILE_SUFFIX} ]]; then
+  if [[ ${FILE_SUFFIX} =~ "," ]]; then
   filter_name=\*.[${FILE_SUFFIX}]
+  else
+  filter_name=\*.${FILE_SUFFIX}
+  fi
 fi
 
 find ${TARGET_DIR} -name "${filter_name}" | xargs -n 1 -t sed -i "" "s/${INPUT_STRING}/${OUTPUT_STRING}/g"

@@ -12,7 +12,7 @@ function usage() {
   echo "-o output file name"
   echo "-t target directory。default ./"
   echo "-h help"
-  echo "Example: rename.sh -i 'input.h' -o 'output.h'"
+  echo "Example: rename.sh -i input.h -o output.h"
   exit 1
 }
 

@@ -47,9 +47,15 @@ if [[ ${BLOG_MASTER_DIR} = ${BLOG_GH_PAGES_DIR} ]]; then
   exit 2
 fi
 
+# 删除_book
+rm -rf ${BLOG_MASTER_DIR}/_book
+
 # update SUMMARY.md
 echo update SUMMARY.md
-book sm g -r ${BLOG_MASTER_DIR} -n "By Blog" -i _book,Resource
+# book sm g -r ${BLOG_MASTER_DIR} -o ${BLOG_MASTER_DIR}/SUMMARY.md -n "By Blog" -i _book,Resource
+cd ${BLOG_MASTER_DIR}
+book sm g -n "By Blog" -i _book,Resource
+cd ${CURRENT_DIR}
 
 # copy SUMMARY.md to README.md
 cat ${BLOG_MASTER_DIR}/SUMMARY.md > ${BLOG_MASTER_DIR}/README.md
