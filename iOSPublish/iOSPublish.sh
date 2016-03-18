@@ -96,7 +96,6 @@ fi
 # upload to fir.im
 if [[ ${WILL_FIR_IM} -gt 0 ]]; then
   SCRIPT="fir publish ${TEMP_APP_PATH} -T ${FIR_TOKEN} -c ${FIR_UPDATE_LOG}"
-  echo "${SCRIPT}"
   ${SCRIPT} || failed "fir publish"
 fi
 
