@@ -115,7 +115,7 @@ BAIDU_SYMBOL_TOOL_DIR=${SCRIPT_DIR}/BaiduSymbolTool
 if [[ ${WILL_BAIDU_SYMBOL} -gt 0 ]]; then
     cp -rf ${BAIDU_SYMBOL_TOOL_DIR}/* ${APP_SAVE_DIR}/
     cd ${APP_SAVE_DIR}
-    SCRIPT="BaiduSymbolTool ${APP_NAME}.xcarchive/dSYMs/${APP_NAME}.app.dSYM/Contents/Resources/DWARF/${APP_NAME}"
+    SCRIPT="./BaiduSymbolTool ${APP_NAME}.xcarchive/dSYMs/${APP_NAME}.app.dSYM/Contents/Resources/DWARF/${APP_NAME}"
     echo "${SCRIPT}"
     ${SCRIPT} || failed "BaiduSymbolTool"
     echo "${PWD}/`ls *.zip|head -n 1`"
