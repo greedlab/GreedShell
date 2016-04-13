@@ -51,14 +51,17 @@ fi
 rm -rf ${BLOG_MASTER_DIR}/_book
 
 # update SUMMARY.md
-echo update SUMMARY.md
-# book sm g -r ${BLOG_MASTER_DIR} -o ${BLOG_MASTER_DIR}/SUMMARY.md -n "By Blog" -i _book,Resource
-cd ${BLOG_MASTER_DIR}
-book sm g -n "By Blog" -i _book,Resource
-cd ${CURRENT_DIR}
+WILL_UPDATE_SUMMARY=0
+if [[ WILL_UPDATE_SUMMARY -gt 0 ]]; then
+  echo update SUMMARY.md
+  # book sm -r ${BLOG_MASTER_DIR} -o ${BLOG_MASTER_DIR}/SUMMARY.md -n "By Blog" -i _book,Resource
+  cd ${BLOG_MASTER_DIR}
+  book sm -n "By Blog" -i _book,Resource
+  cd ${CURRENT_DIR}
 
-# copy SUMMARY.md to README.md
-cat ${BLOG_MASTER_DIR}/SUMMARY.md > ${BLOG_MASTER_DIR}/README.md
+  # copy SUMMARY.md to README.md
+  cat ${BLOG_MASTER_DIR}/SUMMARY.md > ${BLOG_MASTER_DIR}/README.md
+fi
 
 # commit master branch
 git -C ${BLOG_MASTER_DIR} fetch origin master || exit 1
