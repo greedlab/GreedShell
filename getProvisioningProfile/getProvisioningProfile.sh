@@ -45,14 +45,14 @@ fi
 cd "${TARGET_DIRECTORY}"
 
 # echo ${TARGET_NAME}
-files=`ls -t |xargs -n 1 grep -l "${TARGET_NAME}" |head -1`
+files=`ls -t |xargs -n 1 grep -l "<string>${TARGET_NAME}</string>" |head -1`
 for file in ${files}
 do
   # echo ${file}
   if [[ -z ${OUTPUT_PATH} ]]; then
     OUTPUT_PATH=${CURRENT_DIRECTORY}/${TARGET_NAME//\ /\_}.mobileprovision
   fi
-  # echo ${OUTPUT_PATH}
+  echo ${OUTPUT_PATH}
   cp ${file} ${OUTPUT_PATH}
 done
 
